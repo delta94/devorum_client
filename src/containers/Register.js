@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
-import SignUpForm from '../components/Forms/SignUpForm'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-// Actions
+// Dispatch Functionals
 import { registerDispatch } from '../actions/authAction'
+
+// UI Components
+import SignUpForm from '../components/Forms/SignUpForm'
 
 class Register extends Component {
   state = {
@@ -15,8 +18,13 @@ class Register extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.auth.errors) {
-      this.setState({ errors: nextProps.auth.errors })
+    if(nextProps.errors) {
+      const nextState = {
+        ...this.state,
+        errors: nextProps.errors
+      }
+      this.setState(nextState)
+      console.clear()
     }
   }
 
@@ -26,11 +34,12 @@ class Register extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault()
-    const { registerDispatch } = this.props
-    const newUser = {...this.state}
+
+    const { registerDispatch, history } = this.props
+    const newUser = { ...this.state }
     delete newUser.errors
 
-    registerDispatch(newUser)
+    registerDispatch(newUser, history)
   }
 
   render() {
@@ -48,7 +57,14 @@ class Register extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  errors: state.errors
 })
 
-export default connect(mapStateToProps, { registerDispatch })(Register)
+const mapDispatchToProps = {
+  registerDispatch
+}
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Register)
+)

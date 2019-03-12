@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { Wrapper, Form, Input, SubmitButton, RouterLink} from '../../constance/styled/form_styled'
+import { Wrapper, Form, Input, SubmitButton, RouterLink } from '../../constance/styled/form_styled'
 
 export default ({ onChange, onSubmit }) => {
   return (<Wrapper>

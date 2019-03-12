@@ -1,25 +1,19 @@
-import { REGISTER_DONE, REGISTER_FAIL } from '../actions/types'
+import { REGISTER_DONE, SET_CURRENT_USER } from '../actions/types'
+import isEmpty from '../validation/isEmpty'
 
 const initialState = {
   isAuthenticated: false,
-  user: {},
-  errors: {}
+  user: {}
 }
 
 export default (state = initialState, action) => {
   switch(action.type) {
-    case REGISTER_DONE:
+    case SET_CURRENT_USER:
       return {
-        ...initialState,
+        isAuthenticated: !isEmpty(action.payload),
         user: action.payload
-      }
-    case REGISTER_FAIL:
-      return {
-        ...initialState,
-        errors: action.payload
       }
     default:
       return state
   }
 }
-

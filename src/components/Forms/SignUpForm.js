@@ -17,6 +17,7 @@ export default ({ onChange, onSubmit, errors }) => {
         name='email'
         onChange={onChange} />
       { errors.email ? <Error>{errors.email}</Error> : null }
+      { errors.message ? <Error>{errors.message}</Error> : null }
       <Input
         type='password'
         name='password'
