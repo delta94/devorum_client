@@ -1,7 +1,7 @@
 import React from 'react'
 
 import styled from 'styled-components'
-import theme from '../../constance/Theme'
+import theme from '../../constance/theme'
 
 const Navbar = styled.nav`
   margin: 0;

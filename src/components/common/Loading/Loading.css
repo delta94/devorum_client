@@ -1,0 +1,30 @@
+.lds-ripple {
+  display: inline-block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50px, -50px);
+  width: 100px;
+  height: 100px;
+}
+
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+
+@keyframes lds-ripple {
+  0% {
+    top: 46px;
+    left: 46px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: -1px;
+    left: -1px;
+    width: 94px;
+    height: 94px;
+    opacity: 0;
+  }
+}

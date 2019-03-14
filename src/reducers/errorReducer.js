@@ -1,4 +1,4 @@
-import { SET_ERRORS } from '../actions/types'
+import { SET_ERRORS } from '../constance/actionTypes'
 
 const initialState = {}
 

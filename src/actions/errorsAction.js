@@ -1,4 +1,4 @@
-import { SET_ERRORS } from './types'
+import { SET_ERRORS } from '../constance/actionTypes'
 
 export const setErrors = ({ response: { data } }) => ({
   type: SET_ERRORS,

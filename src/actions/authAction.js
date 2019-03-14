@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // Static data source
 import api from '../constance/api'
-import { REGISTER_DONE, SET_CURRENT_USER } from './types'
+import { REGISTER_DONE, SET_CURRENT_USER } from '../constance/actionTypes'
 
 // Handle token utils
 import { setAuthToken } from '../utils/setAuthToken'
