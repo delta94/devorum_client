@@ -1,4 +1,4 @@
-const baseUri = 'http://localhost:3000/api/'
+const baseUri = 'https://devorum.herokuapp.com/api/'
 const bindLink = path => `${baseUri + path}`
 
 export default {

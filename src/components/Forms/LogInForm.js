@@ -1,21 +1,28 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { Wrapper, Form, Input, SubmitButton, RouterLink } from '../../constance/styled/form_styled'
+import { Wrapper, Form, SubmitButton, RouterLink } from '../../constance/styled/form_styled'
+import TextFieldGroup from '../common/TextFieldGroup'
 
-export default ({ onChange, onSubmit }) => {
+export default ({ onChange, onSubmit, errors }) => {
   return (<Wrapper>
-    <Form onSubmit={onSubmit} >
-      <h3>Log In</h3>
-      <Input
+    <Form onSubmit={onSubmit}>
+      <h3 style={{ textAlign: 'center' }}>Log In</h3>
+      <TextFieldGroup
         placeholder='Something@email.xyz'
         name='email'
-        onChange={onChange} />
-      <Input
+        label="Email"
+        error={errors.email}
+        onChange={onChange}
+      />
+      <TextFieldGroup
+        label="Password"
         type='password'
         name='password'
-        placeholder='Password'
-        onChange={onChange} />
+        error={errors.password}
+        placeholder='Enter your password'
+        onChange={onChange}
+      />
       <Link
         style={RouterLink}
         to='/register'>

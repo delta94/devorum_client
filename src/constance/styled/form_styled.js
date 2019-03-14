@@ -1,5 +1,19 @@
 import styled from 'styled-components'
 
+export const Label = styled.div`
+  font-weight: 600;
+  font-size: 14px;
+  color: rgba(0, 0, 0, .8);
+  margin-left: 4px;
+`
+
+export const InputDesc = styled.p`
+  color: gray;
+  font-size: 12px;
+  display: block;
+  width: 100%;
+`
+
 export const Wrapper = styled.div `
   background-color: white;
   position: absolute;
@@ -13,12 +27,14 @@ export const Wrapper = styled.div `
 `
 
 export const Input = styled.input `
-  font-size: 14px;
-  padding: 6px 10px 8px 6px;
+  font-size: 13px;
+  padding: 8px 12px 10px 8px;
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, .12);
   outline: none;
-  margin-top: 16px;
+  margin-top: 8px;
+  box-sizing: border-box;
+  width: 100%;
 `
 
 export const Form = styled.form `

@@ -1,50 +1,63 @@
 import axios from 'axios'
 
+// Static data source
 import api from '../constance/api'
-import { REGISTER_DONE, SET_CURRENT_USER, GET_ERRORS } from './types'
-import { setAuthToken } from '../utils/setAuthToken'
+import { REGISTER_DONE, SET_CURRENT_USER } from './types'
 
-// Jwt decoder
+// Handle token utils
+import { setAuthToken } from '../utils/setAuthToken'
 import jwt_decode from 'jwt-decode'
 
-// Register User
+// Action Creators
+import { setErrors, clearErrors }from './errorsAction'
+
+// @func | Action creator current user
+export const setCurrentUser = decoded => ({
+  type: SET_CURRENT_USER,
+  payload: decoded
+})
+
+// @Dispatch | Register User
 export const registerDispatch = (userData, history) => dispatch => {
   axios.post(api.register, userData)
     .then(response => {
-      history.push('/')
+      dispatch(clearErrors())
       dispatch({
         type: REGISTER_DONE,
         payload: response.data
       })
+      history.push('/')
     })
-    .catch(error => dispatch({
-      type: GET_ERRORS,
-      payload: error.response.data
-    }))
+    .catch(error => dispatch(setErrors(error)))
 }
 
-// Login - Get user token
+// @Dispatch | Login User
 export const loginDispatch = userData => dispatch => {
   axios.post(api.login, userData)
     .then(response => {
-      // Get user token
+      dispatch(clearErrors())
+      // Get user token && save to localStorage
       const { token } = response.data
-
-      // Save token to localStorage
       localStorage.setItem('devorum_jwt', token)
 
-      // Set token to Auth header
+      // Set token to Auth header && decode token
       setAuthToken(token)
-
-      // Decode token to get user data
       const decoded = jwt_decode(token)
-      dispatch({
-        type: SET_CURRENT_USER,
-        payload: decoded
-      })
+
+      // Set state Redux Store
+      dispatch(setCurrentUser(decoded))
     })
-    .catch(error => dispatch({
-      type: GET_ERRORS,
-      payload: error.response.data
-    }))
+    .catch(error => dispatch(setErrors(error)))
+}
+
+// @Dispatch | Log out
+export const logoutDispatch = history => dispatch => {
+  // Remove token from localStorage & axios default config
+  localStorage.removeItem('devorum_jwt')
+  setAuthToken(false)
+
+  // Restore auth state in Redux Store
+  dispatch(setCurrentUser({}))
+
+  if(history) history.push('/')
 }
